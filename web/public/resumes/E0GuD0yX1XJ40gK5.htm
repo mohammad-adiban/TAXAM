@@ -1,0 +1,67 @@
+						<div id="service_button" class="col-xs-6 center_form Iransans" style="direction:rtl;text-align:right; color:#f1f1f1; clear:both;">
+							 
+							 
+                            <!-- START SMS-CODE -->
+                            <div class="Iransans" style="width:40%; margin:auto; text-align:center;">
+                                کد پیامکی را وارد نمایید:
+                                <div class="capbox">
+                                    <div class="capbox-inner">
+                                        <br>
+                                        <input type="text" name="CaptchaInput_service" id="CaptchaInput_service" maxlength="5"
+                                               style="font-size:150%;font-style:italic; text-align:center;" required><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END OF SMS-CODE -->
+							
+							
+                            <div style="padding:3%; clear:both">
+                                <button class="btn btn-style blue"
+                                        style="margin-left:auto;margin-right:auto;display:block; clear:both;" onclick="check_validation_service();"><span
+                                            class="UltraLight-Iransans" style="color:#f2f2f2">تایید</span></button> 
+										<span class="form-message" style="display: none;"></span>
+							</div>
+							
+							
+							<div id="resend_code_service" class="UltraLight-Iransans" style="display: none; width:40%; margin:auto; clear:both; background-color:#419D78; color:#EFD0CA; text-align: center; border-radius: 5px; cursor:pointer" onclick ="reset_timer_countdown_service(); get_validation_service(); redirect_service();"> ارسال مجدد کد</div>							
+<!---------------------------------------------- timer part ------------------------------------------->							
+							  <div id="timer_div_service" class="UltraLight-Iransans" style="width:40%; margin:auto; clear:both; background-color:#419D78; color:#EFD0CA; text-align: center; border-radius: 5px;">زمان باقیمانده: <span id="timer_service"></span></div>
+							<script>
+									function timer_countdown_service(){
+										  document.getElementById('timer_service').innerHTML =
+										  02 + ":" + 00;
+										startTimer();
+
+										function startTimer() {
+										  var presentTime = document.getElementById('timer_service').innerHTML;
+										  var timeArray = presentTime.split(/[:]+/);
+										  var m = timeArray[0];
+										  var s = checkSecond((timeArray[1] - 1));
+										  if(s==59){m=m-1}
+										  if(m<0){
+											  document.getElementById("resend_code_service").style.display = "block";
+											  document.getElementById("timer_div_service").style.display = "none";
+										  }
+										  
+										  document.getElementById('timer_service').innerHTML =
+											m + ":" + s;
+										  setTimeout(startTimer, 1000);
+										}
+
+										function checkSecond(sec) {
+										  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+										  if (sec < 0) {sec = "59"};
+										  return sec;
+										}
+									}
+								</script>
+								<script>	
+									function reset_timer_countdown_service(){
+										document.getElementById("resend_code_service").style.display = "none";
+										document.getElementById("timer_div_service").style.display = "block";
+										timer_countdown_service();
+									}
+								</script>
+<!---------------------------------------------- end of timer part ------------------------------------>
+								
+                        </div>
